@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: sans-serif;
+      cursor: pointer;
+    }
+    #message {
+      font-size: 1.5rem;
+    }
+    iframe {
+      display: none;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="message">Click anywhere to continue...</div>
+  <iframe id="rick" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0&showinfo=0&rel=0&modestbranding=1&fs=1" allow="autoplay; fullscreen"></iframe>
+
+  <script>
+    const msg = document.getElementById('message');
+    const iframe = document.getElementById('rick');
+
+    function goFullscreen() {
+      msg.style.display = 'none';
+      iframe.style.display = 'block';
+
+      // Request fullscreen
+      const elem = document.documentElement;
+      const requestFullScreen = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen || elem.msRequestFullscreen;
+      if (requestFullScreen) {
+        requestFullScreen.call(elem);
+      }
+
+      // Reload iframe to ensure autoplay works
+      iframe.src += "&autoplay=1";
+    }
+
+    document.body.addEventListener('click', goFullscreen, { once: true });
+  </script>
+</body>
+</html>
